@@ -12,8 +12,17 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
+}/*
+.center {
+    height: 200px;
+    width: 400px;
+    background: black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* Center vertically and horizontally 
+    transform: translate(-50%, -50%);
+}*/
 .question-box {
     background-color: #583058;
     padding: 20px;

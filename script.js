@@ -14,10 +14,17 @@ const questions = [
     },
     {
         question: "What is my favorite animal?",
-        options: ["Dog", "Cat", "Horse", "Chinchila"],
+        options: ["Dog", "Cat", "Horse", "Chinchilla"],
         correctAnswer: 0
     }
 ];
+
+function startQuiz() {
+    document.getElementById('startButton').style.display = 'none'; // Hide the Start Quiz button
+    document.getElementById('quiz-container').style.display = 'block'; // Show the quiz container
+    displayQuestion(); // Start displaying questions
+    startCountdown(10); // Start the countdown
+}
 
 function displayQuestion() {
     const currentQuestionObj = questions[currentQuestion];
@@ -36,13 +43,15 @@ function displayQuestion() {
         label.appendChild(document.createTextNode(` ${option}`));
         optionsDiv.appendChild(label);
     });
-    
-    
 }
 
 function startCountdown(seconds) {
+    clearInterval(timer);
     let timeLeft = seconds;
+    document.getElementById('countdown-text').innerText = `Time left: ${timeLeft} seconds`;
+
     timer = setInterval(function() {
+        timeLeft--;
         document.getElementById('countdown-text').innerText = `Time left: ${timeLeft} seconds`;
 
         if (timeLeft <= 0) {
@@ -55,8 +64,6 @@ function startCountdown(seconds) {
                 startCountdown(10); // Change the countdown time for each question
             }
         }
-
-        timeLeft--;
     }, 1000);
 }
 
@@ -91,7 +98,7 @@ function endQuiz() {
     let incorrectQuestions = [];
 
     questions.forEach((question, index) => {
-        const selectedOption = document.querySelector(`input[name="answer${index}"]:checked`);
+        const selectedOption = document.querySelector('input[name="answer"]:checked');
 
         if (selectedOption) {
             const answerIndex = parseInt(selectedOption.value);
@@ -107,8 +114,6 @@ function endQuiz() {
     resultHTML += `<p>Your score: ${score}/${questions.length}</p>`;
 
     if (incorrectQuestions.length > 0) {
-       
-
         resultHTML += `<button onclick="showCorrectAnswers()">Show Correct Answers</button>`;
     } else {
         resultHTML += `<p>Congratulations! You got all the answers correct!</p>`;
@@ -127,8 +132,7 @@ function showCorrectAnswers() {
     document.getElementById('quiz-container').innerHTML += correctAnswersHTML;
 }
 
-// Start the countdown when the page loads
-window.onload = function() {
-    displayQuestion();
-    startCountdown(10); // Change the countdown time for each question
-};
+// Start the quiz and countdown when the page loads
+/*window.onload = function() {
+    startQuiz();
+};*/

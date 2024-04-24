@@ -5,24 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiple Choice Quiz - Kahoot Style</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional CSS for styling the Start Quiz button */
+        #startButton {
+            display: block;
+            margin: 0 auto;
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #db34d3;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            height: 200px;
+    width: 400px;
+    background: rgb(175, 57, 136);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* Center vertically and horizontally */
+    transform: translate(-50%, -50%);
+        }
+
+        #startButton:hover {
+            background-color: #b929a6;
+        }
+    </style>
 </head>
 <body>
-    <div id="quiz-container">
+    <button id="startButton" onclick="startQuiz()">Start Quiz</button> 
+    <div id="quiz-container" style="display: none;"> <!-- Initially hide the quiz container -->
         <div class="question-box">
             <div class="question-header">
-                
                 <h1 id="question">Question 1</h1>
             </div>
             <div id="options" class="options-container"></div>
             <button onclick="checkAnswer()" class="submit-button">Submit</button>
         </div>
         <div id="countdown" class="countdown-container">
-            
             <span id="countdown-text">Time Left: 10 seconds</span>
         </div>
-        
     </div>
 
     <script src="script.js"></script>
+
+    
 </body>
 </html>
+
