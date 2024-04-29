@@ -61,7 +61,7 @@ function startCountdown(seconds) {
                 endQuiz();
             } else {
                 displayQuestion();
-                startCountdown(10); // Change the countdown time for each question
+                startCountdown(10); 
             }
         }
     }, 1000);
@@ -87,7 +87,7 @@ function checkAnswer() {
             endQuiz();
         } else {
             displayQuestion();
-            startCountdown(10); // Change the countdown time for each question
+            startCountdown(10); 
         }
     } else {
         alert('Please select an option!');
@@ -113,14 +113,37 @@ function endQuiz() {
     let resultHTML = `<h1>Quiz Results</h1>`;
     resultHTML += `<p>Your score: ${score}/${questions.length}</p>`;
 
-    if (incorrectQuestions.length > 0) {
-        resultHTML += `<button onclick="showCorrectAnswers()">Show Correct Answers</button>`;
-    } else {
-        resultHTML += `<p>Congratulations! You got all the answers correct!</p>`;
-    }
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.innerHTML = resultHTML;
 
-    document.getElementById('quiz-container').innerHTML = resultHTML;
+    if (incorrectQuestions.length > 0) {
+        const showCorrectBtn = document.createElement('button');
+        showCorrectBtn.textContent = 'Show Correct Answers';
+        showCorrectBtn.onclick = showCorrectAnswers;
+        quizContainer.appendChild(showCorrectBtn);
+    } else {
+        quizContainer.innerHTML += `<p>Congratulations! You got all the answers correct!</p>`;
+    }
 }
+
+function showCorrectAnswers() {
+    let correctAnswersHTML = `<h2>Correct Answers:</h2>`;
+    questions.forEach((question, index) => {
+        correctAnswersHTML += `<p><strong>${index + 1}. ${question.question}</strong></p>`;
+        correctAnswersHTML += `<p><strong>Correct Answer:</strong> ${question.options[question.correctAnswer]}</p>`;
+    });
+
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.innerHTML += correctAnswersHTML;
+
+    // Hide the button after rendering the correct answers
+    const showCorrectBtn = document.querySelector('button');
+    if (showCorrectBtn) {
+        showCorrectBtn.style.display = 'none';
+    }
+}
+
+
 
 function showCorrectAnswers() {
     let correctAnswersHTML = `<h2>Correct Answers:</h2>`;
