@@ -4,9 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Quiz</title>
-    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js";></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
+
 <body>
-    <header><h1>Create a quiz</h1></header>
+    <header>
+        <h1>Create a Quiz</h1>
+    </header>
+    <form>
+        <input type="text" placeholder="Question A" id="questionA">
+        <input type="text" placeholder="Question B" id="questionB">
+        <input type="text" placeholder="Question C" id="questionC">
+        <input type="text" placeholder="Question D" id="questionD">
+        <button type="button" onclick="writeData()">Submit</button>
+    </form>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtSoFB8x26DETgAuJtlkATmG-jChHuAN0",
+            authDomain: "quizapp-61d57.firebaseapp.com",
+            databaseURL: "https://quizapp-61d57-default-rtdb.firebaseio.com",
+            projectId: "quizapp-61d57",
+            storageBucket: "quizapp-61d57.appspot.com",
+            messagingSenderId: "46536025266",
+            appId: "1:46536025266:web:761bee08967e01ee6715ab",
+            measurementId: "G-SSDW0HDS7L"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        function writeData(){
+            firebase.database().ref("user").set({
+                A: document.getElementById("questionA").value,
+                B: document.getElementById("questionB").value,
+                C: document.getElementById("questionC").value,
+                D: document.getElementById("questionD").value,
+            })
+            .then(() => {
+                alert("Data saved successfully!");
+            })
+            .catch((error) => {
+                alert("Error saving data: " + error.message);
+            });
+        }
+    </script>
+     <a href="index.html">
+        <button class="start-button">Back to Quiz</button>
+    </a>
 </body>
 </html>
