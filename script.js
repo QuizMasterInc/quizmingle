@@ -22,6 +22,30 @@ const questions = [
         options: ["Berlin", "Madrid", "Rome", "Paris"],
         correctAnswer: 3
     },
+    {
+        category: "History",
+        question: "who was president during the US Civil war",
+        options: ["Brakk Obama", "Donald Trump", "Joe Biden", "Aberham Lincoln"],
+        correctAnswer: 3
+    },
+    {
+        category: "Math",
+        question: "What is 1 + 1?",
+        options: ["6", "4", "2", "5"],
+        correctAnswer: 2
+    },
+    {
+        category: "Science",
+        question: "I dont know what is the coolest subject",
+        options: ["Math", "Sports", "Science", "History"],
+        correctAnswer: 2
+    },
+    {
+        category: "Sports",
+        question: "Volleyball players",
+        options: ["6", "4", "2", "5"],
+        correctAnswer: 3
+    },
     // Add more questions for different categories...
 ];
 
@@ -95,6 +119,7 @@ function endQuiz() {
     let resultHTML = `<h1>Quiz Results</h1>`;
     resultHTML += `<p>Your score: ${score}/${questions.length}</p>`;
     resultHTML += `<button onclick="showCorrectAnswers()" class="show-answers-button">Show Correct Answers</button>`;
+    resultHTML += `<button onclick="restartQuiz()" class="restart-button">Go Back to Beginning</button>`;
     document.getElementById('quiz-container').innerHTML = resultHTML;
 }
 
@@ -126,6 +151,14 @@ function startQuiz() {
         alert('No questions found for the selected category.');
     }
 }
+function restartQuiz() {
+    score = 0;
+    currentQuestion = 0;
+    chosenCategory = null;
+    document.getElementById('category-selection').style.display = 'block';
+    document.getElementById('quiz-container').style.display = 'none';
+}
+
 
 window.onload = function() {
     displayQuestion();
