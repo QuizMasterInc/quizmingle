@@ -63,10 +63,11 @@
         <h1>Create a Quiz</h1>
     </header>
     <form>
-        <input type="text" placeholder="Question A" id="questionA">
-        <input type="text" placeholder="Question B" id="questionB">
-        <input type="text" placeholder="Question C" id="questionC">
-        <input type="text" placeholder="Question D" id="questionD">
+        <input type="text" placeholder="Question:" id="question">
+        <input type="text" placeholder="Answer A" id="AnswerA">
+        <input type="text" placeholder="Answer B" id="AnswerA">
+        <input type="text" placeholder="Answer C" id="AnswerA">
+        <input type="text" placeholder="Answer D" id="AnswerA">
         <button type="button" onclick="writeData()">Submit</button>
     </form>
 
@@ -88,10 +89,11 @@
 
         function writeData(){
             firebase.database().ref("user").set({
-                A: document.getElementById("questionA").value,
-                B: document.getElementById("questionB").value,
-                C: document.getElementById("questionC").value,
-                D: document.getElementById("questionD").value,
+                Q: document.getElementById("question").value,
+                A: document.getElementById("AnswerA").value,
+                B: document.getElementById("AnswerB").value,
+                C: document.getElementById("AnswerC").value,
+                D: document.getElementById("AnswerD").value,
             })
             .then(() => {
                 alert("Data saved successfully!");
